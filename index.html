@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sekiratte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* UPDATED BASE COLORS */
+            --base: #231e1c;      /* Previously crust */
+            --mantle: #1a1614;
+            --crust: #0f0d0c;     /* Previously base */
+            
+            /* Text & UI */
+            --text: #e3d8c9;
+            --subtext1: #c5b7a3;
+            --subtext0: #a09585;
+            --overlay2: #7a6e64;
+            --overlay1: #5a5149;
+            --overlay0: #3a3530;
+            
+            /* UPDATED SURFACES */
+            --surface2: #402f28;   /* Previously surface0 */
+            --surface1: #352c26;
+            --surface0: #2a231e;   /* Previously surface2 */
+            
+            /* Accents */
+            --red: #9a2a2a;
+            --maroon: #6d1e1e;
+            --green: #5c7c46;
+            --peach: #d4875d;
+            --blue: #3a5a7a;
+            --lavender: #7a6a9a;
+            --yellow: #d4af37;
+            --rosewater: #e7c8a9;
+            
+            /* Special Tones */
+            --flamingo: #c96d6d;
+            --pink: #b26888;
+            --mauve: #8a6a9a;
+            --teal: #4a8a8a;
+            --sky: #6a9aaa;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--mantle), var(--base));
+            color: var(--text);
+            font-family: 'Cinzel', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .japanese-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%233a3530" stroke-width="0.5" opacity="0.3"/><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%233a3530" stroke-width="0.3" opacity="0.2"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .sakura {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--flamingo) 30%, var(--pink) 100%);
+            border-radius: 50% 50% 50% 0;
+            opacity: 0.7;
+            filter: blur(1px);
+            z-index: -1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--overlay1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(154, 42, 42, 0.5);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        header h1::after {
+            content: "影 二度";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            font-family: 'Noto Serif JP', serif;
+            letter-spacing: 2px;
+            color: var(--subtext0);
+            white-space: nowrap;
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            color: var(--subtext0);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .quote {
+            font-style: italic;
+            margin: 1.2rem auto;
+            padding: 0.8rem;
+            border-left: 3px solid var(--red);
+            max-width: 600px;
+            color: var(--subtext1);
+            font-size: clamp(0.85rem, 3vw, 1rem);
+        }
+
+        .category {
+            margin-bottom: 2rem;
+            background: var(--surface2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .category-header {
+            background: var(--surface1);
+            padding: 1rem;
+            border-bottom: 1px solid var(--overlay1);
+            display: flex;
+            align-items: center;
+        }
+
+        .category-header h2 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-left: 0.8rem;
+        }
+
+        .category-header i {
+            color: var(--peach);
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+        }
+
+        .color-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.2rem;
+            padding: 1.2rem;
+        }
+
+        /* FIXED: Consistent color cards */
+        .color-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .color-preview {
+            height: 100px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .color-preview::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0));
+        }
+
+        .color-info {
+            background: var(--surface0);
+            padding: 0.8rem;
+            font-family: 'Noto Serif JP', serif;
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            min-height: 110px;
+        }
+
+        .color-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .color-name {
+            font-weight: bold;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            margin-bottom: 0.3rem;
+            color: var(--text);
+        }
+
+        .color-hex {
+            color: var(--subtext1);
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+        }
+
+        .color-theme {
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
+            color: var(--subtext0);
+            margin-top: 0.4rem;
+            font-style: italic;
+            min-height: 2.5em; /* Ensure consistent space for 2 lines */
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--overlay1);
+            color: var(--text);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            align-self: center;
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
+        }
+
+        .copy-btn:hover {
+            background: var(--surface1);
+            transform: scale(1.1);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+            color: var(--base);
+            border-color: var(--green);
+        }
+
+        .copy-btn.copied i {
+            transform: scale(1.2);
+        }
+
+        .usage-section {
+            margin-top: 3rem;
+            background: var(--surface1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .usage-section h2 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            text-align: center;
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .usage-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--red), transparent);
+        }
+
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .usage-card {
+            background: var(--surface2);
+            border-radius: 8px;
+            padding: 1.2rem;
+            border: 1px solid var(--overlay1);
+        }
+
+        .usage-card h3 {
+            color: var(--yellow);
+            margin-bottom: 0.8rem;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            display: flex;
+            align-items: center;
+        }
+
+        .usage-card h3 i {
+            margin-right: 0.6rem;
+            color: var(--peach);
+            font-size: clamp(1rem, 4vw, 1.2rem);
+        }
+
+        .usage-card p {
+            line-height: 1.6;
+            color: var(--subtext1);
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+        }
+
+        .palette-preview {
+            height: 120px;
+            background: linear-gradient(to right, 
+                var(--base), var(--mantle), var(--crust),
+                var(--text), var(--subtext1), var(--subtext0),
+                var(--red), var(--maroon), var(--green), 
+                var(--peach), var(--blue), var(--lavender),
+                var(--yellow), var(--rosewater), var(--flamingo), var(--pink), var(--mauve), var(--teal), var(--sky)
+            );
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .palette-preview::after {
+            content: "Sekiratte Palette";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            font-weight: bold;
+            color: rgba(227, 216, 201, 0.2);
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            white-space: nowrap;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            color: var(--subtext0);
+            border-top: 1px solid var(--overlay1);
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(0.8rem, 3vw, 0.95rem);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--surface1);
+            border: 1px solid var(--overlay1);
+            color: var(--text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .color-container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .color-preview {
+                height: 90px;
+            }
+            
+            .color-info {
+                padding: 0.7rem;
+                min-height: 100px;
+            }
+            
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .palette-preview {
+                height: 100px;
+            }
+            
+            .update-notice {
+                margin: 0.8rem 0.5rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            header {
+                padding: 1rem 0;
+            }
+            
+            .subtitle, .quote {
+                max-width: 95%;
+            }
+            
+            .color-container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .color-preview {
+                height: 80px;
+            }
+            
+            .color-info {
+                min-height: 90px;
+            }
+            
+            .category-header {
+                padding: 0.8rem;
+            }
+            
+            .usage-section {
+                padding: 1rem;
+            }
+            
+            .usage-card {
+                padding: 1rem;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .palette-preview::after {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="japanese-pattern"></div>
+    
+    <!-- Sakura blossoms -->
+    <div class="sakura" style="left: 10%; animation-duration: 15s;"></div>
+    <div class="sakura" style="left: 25%; animation-duration: 20s; animation-delay: -5s;"></div>
+    <div class="sakura" style="left: 50%; animation-duration: 18s; animation-delay: -3s;"></div>
+    <div class="sakura" style="left: 75%; animation-duration: 22s; animation-delay: -7s;"></div>
+    <div class="sakura" style="left: 90%; animation-duration: 17s; animation-delay: -2s;"></div>
+    
+    <!-- Mobile menu toggle -->
+    <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>SEKIRATTE</h1>
+            <p class="subtitle">A feudal Japan-inspired color palette capturing the essence of Ashina's stone fortresses, autumn valleys, blood-soaked battles, and Shinto shrines.</p>
+            <p class="quote">"Hesitation is defeat. This palette embodies the somber beauty and sudden violence of the Sengoku era."</p>
+            
+        </header>
+        
+        <div class="palette-preview"></div>
+        
+        <!-- Base Colors -->
+        <section class="category">
+            <div class="category-header">
+                <i class="fas fa-mountain"></i>
+                <h2>Base Colors</h2>
+            </div>
+            <div class="color-container">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--base);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">base</div>
+                            <div class="color-hex">#231e1c</div>
+                            <div class="color-theme">Active elements</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--mantle);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">mantle</div>
+                            <div class="color-hex">#1a1614</div>
+                            <div class="color-theme">Secondary background</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--crust);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">crust</div>
+                            <div class="color-hex">#0f0d0c</div>
+                            <div class="color-theme">Background</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Text & UI -->
+        <section class="category">
+            <div class="category-header">
+                <i class="fas fa-scroll"></i>
+                <h2>Text & UI</h2>
+            </div>
+            <div class="color-container">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--text);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">text</div>
+                            <div class="color-hex">#e3d8c9</div>
+                            <div class="color-theme">Primary text</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--subtext1);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">subtext1</div>
+                            <div class="color-hex">#c5b7a3</div>
+                            <div class="color-theme">Secondary text</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--subtext0);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">subtext0</div>
+                            <div class="color-hex">#a09585</div>
+                            <div class="color-theme">Tertiary text</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--overlay2);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">overlay2</div>
+                            <div class="color-hex">#7a6e64</div>
+                            <div class="color-theme">Hints/disabled</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--overlay1);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">overlay1</div>
+                            <div class="color-hex">#5a5149</div>
+                            <div class="color-theme">Borders</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--overlay0);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">overlay0</div>
+                            <div class="color-hex">#3a3530</div>
+                            <div class="color-theme">Subtle dividers</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Surfaces -->
+        <section class="category">
+            <div class="category-header">
+                <i class="fas fa-torii-gate"></i>
+                <h2>Surfaces</h2>
+            </div>
+            <div class="color-container">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--surface2);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">surface2</div>
+                            <div class="color-hex">#402f28</div>
+                            <div class="color-theme">Active inputs</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--surface1);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">surface1</div>
+                            <div class="color-hex">#352c26</div>
+                            <div class="color-theme">Hovered states</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--surface0);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">surface0</div>
+                            <div class="color-hex">#2a231e</div>
+                            <div class="color-theme">Cards/panels</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Accents -->
+        <section class="category">
+            <div class="category-header">
+                <i class="fas fa-star"></i>
+                <h2>Accents</h2>
+            </div>
+            <div class="color-container">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--red);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">red</div>
+                            <div class="color-hex">#9a2a2a</div>
+                            <div class="color-theme">Mortal Blade</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--maroon);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">maroon</div>
+                            <div class="color-hex">#6d1e1e</div>
+                            <div class="color-theme">Dried blood</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--green);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">green</div>
+                            <div class="color-hex">#5c7c46</div>
+                            <div class="color-theme">Divine Grass</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--peach);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">peach</div>
+                            <div class="color-hex">#d4875d</div>
+                            <div class="color-theme">Autumn leaves</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--blue);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">blue</div>
+                            <div class="color-hex">#3a5a7a</div>
+                            <div class="color-theme">Fountainhead waters</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--lavender);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">lavender</div>
+                            <div class="color-hex">#7a6a9a</div>
+                            <div class="color-theme">Illusive mist</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">yellow</div>
+                            <div class="color-hex">#d4af37</div>
+                            <div class="color-theme">Sen</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--rosewater);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">rosewater</div>
+                            <div class="color-hex">#e7c8a9</div>
+                            <div class="color-theme">Lantern light</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Special Tones -->
+        <section class="category">
+            <div class="category-header">
+                <i class="fas fa-dragon"></i>
+                <h2>Special Tones</h2>
+            </div>
+            <div class="color-container">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--flamingo);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">flamingo</div>
+                            <div class="color-hex">#c96d6d</div>
+                            <div class="color-theme">Sakura petals</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--pink);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">pink</div>
+                            <div class="color-hex">#b26888</div>
+                            <div class="color-theme">Healing Gourd glow</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--mauve);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">mauve</div>
+                            <div class="color-hex">#8a6a9a</div>
+                            <div class="color-theme">Dragonrot corruption</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--teal);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">teal</div>
+                            <div class="color-hex">#4a8a8a</div>
+                            <div class="color-theme">Prosthetic tools (iron/steel)</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: var(--sky);"></div>
+                    <div class="color-info">
+                        <div class="color-details">
+                            <div class="color-name">sky</div>
+                            <div class="color-hex">#6a9aaa</div>
+                            <div class="color-theme">Ashina sky (dawn)</div>
+                        </div>
+                        <button class="copy-btn" title="Copy color">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Usage Recommendations -->
+        <section class="usage-section">
+            <h2>Usage Recommendations</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--subtext1); line-height: 1.7; font-size: clamp(0.9rem, 3.5vw, 1rem);">
+                This palette embodies the somber, atmospheric mood of Ashina with sudden bursts of crimson (combat) and gold (rewards). 
+                Below are recommended pairings for different UI contexts and themes.
+            </p>
+            
+            <div class="usage-grid">
+                <div class="usage-card">
+                    <h3><i class="fas fa-skull"></i> Combat UI Elements</h3>
+                    <p>Use <span style="color: var(--red);">base + text + red</span> for critical combat elements. This combination creates high contrast for important information during battle, with the blood red accent drawing immediate attention.</p>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-seedling"></i> Interactive Items</h3>
+                    <p>Pair <span style="color: var(--surface0);">surface0</span> with <span style="color: var(--yellow);">yellow</span> and <span style="color: var(--green);">green</span> for interactive items and consumables. The temple wood background complements the sen coins and divine grass colors.</p>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-mountain"></i> Mystical Themes</h3>
+                    <p>Combine <span style="color: var(--blue);">blue</span> and <span style="color: var(--lavender);">lavender</span> for mystical/divine themes. These hues evoke the waters of Fountainhead Palace and the otherworldly spirits.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Created with the spirit of the Shinobi • Inspired by Sekiro: Shadows Die Twice • 隻狼</p>
+            <p style="margin-top: 0.5rem; font-size: clamp(0.7rem, 3vw, 0.9rem);">Palette structure based on Catppuccin • May you find your resurrection</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create additional sakura blossoms
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 0; i < 15; i++) {
+                const sakura = document.createElement('div');
+                sakura.classList.add('sakura');
+                
+                // Random position
+                const left = Math.random() * 100;
+                sakura.style.left = `${left}%`;
+                
+                // Random animation
+                const duration = 15 + Math.random() * 15;
+                const delay = -1 * Math.random() * 10;
+                sakura.style.animationDuration = `${duration}s`;
+                sakura.style.animationDelay = `${delay}s`;
+                
+                // Random size
+                const size = 10 + Math.random() * 15;
+                sakura.style.width = `${size}px`;
+                sakura.style.height = `${size}px`;
+                
+                document.body.appendChild(sakura);
+            }
+            
+            // Add subtle interaction to color cards
+            const cards = document.querySelectorAll('.color-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const preview = this.querySelector('.color-preview');
+                    preview.style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const preview = this.querySelector('.color-preview');
+                    preview.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Copy button functionality
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.color-card');
+                    const hex = card.querySelector('.color-hex').textContent;
+                    
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(hex).then(() => {
+                        // Visual feedback
+                        const icon = this.querySelector('i');
+                        icon.className = 'fas fa-check';
+                        this.classList.add('copied');
+                        
+                        // Revert after 1.5 seconds
+                        setTimeout(() => {
+                            icon.className = 'fas fa-copy';
+                            this.classList.remove('copied');
+                        }, 1500);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy color to clipboard');
+                    });
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            mobileMenuToggle.addEventListener('click', function() {
+                const menuIcon = this.querySelector('i');
+                if (menuIcon.classList.contains('fa-bars')) {
+                    menuIcon.className = 'fas fa-times';
+                    // Show menu functionality would go here
+                } else {
+                    menuIcon.className = 'fas fa-bars';
+                    // Hide menu functionality would go here
+                }
+            });
+        });
+    </script>
+</body>
+</html>
