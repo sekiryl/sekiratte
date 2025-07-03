@@ -1,4 +1,7 @@
-# Sekiratte ⛩️
+<h1 align="center">
+	<img src="./assets/images/logo.png" width="100" alt="Logo"/><br/>
+	Sekiratte
+</h1>
 
 > *A dark, moody color scheme inspired by Sekiro: Shadows Die Twice, built on the structure of Catppuccin.*
 
