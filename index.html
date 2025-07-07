@@ -412,25 +412,6 @@
             font-size: clamp(0.8rem, 3vw, 0.95rem);
         }
 
-        /* Mobile menu toggle */
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--surface1);
-            border: 1px solid var(--overlay1);
-            color: var(--text);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
@@ -502,10 +483,6 @@
                 padding: 1rem;
             }
             
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
             .palette-preview::after {
                 font-size: 1.2rem;
             }
@@ -522,11 +499,6 @@
     <div class="sakura" style="left: 50%; animation-duration: 18s; animation-delay: -3s;"></div>
     <div class="sakura" style="left: 75%; animation-duration: 22s; animation-delay: -7s;"></div>
     <div class="sakura" style="left: 90%; animation-duration: 17s; animation-delay: -2s;"></div>
-    
-    <!-- Mobile menu toggle -->
-    <div class="mobile-menu-toggle">
-        <i class="fas fa-bars"></i>
-    </div>
     
     <div class="container">
       <header>
@@ -1013,19 +985,6 @@
                         alert('Failed to copy color to clipboard');
                     });
                 });
-            });
-            
-            // Mobile menu toggle
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            mobileMenuToggle.addEventListener('click', function() {
-                const menuIcon = this.querySelector('i');
-                if (menuIcon.classList.contains('fa-bars')) {
-                    menuIcon.className = 'fas fa-times';
-                    // Show menu functionality would go here
-                } else {
-                    menuIcon.className = 'fas fa-bars';
-                    // Hide menu functionality would go here
-                }
             });
         });
     </script>
