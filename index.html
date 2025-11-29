@@ -1,990 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Favicon Meta -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/assets/favicon/site.webmanifest">
-    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
-    <meta name="theme-color" content="#d4875d">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sekiratte</title>
-
-    <meta name="description" content="Sekiratte is a carefully crafted color palette by Sekiryl, inspired by the moody elegance of Sekiro. Ideal for digital art, UI, and themed projects." />
-    <meta name="keywords" content="Sekiratte, Sekiryl, color palette, Sekiro palette, UI colors, design system" />
-    <meta name="author" content="Sekiryl" />
-    <link rel="canonical" href="https://sekiratte.sekiryl.is-a.dev" />
-    <meta property="og:title" content="Sekiratte" />
-    <meta property="og:description" content="A dark, elegant color palette inspired by Sekiro, created by Sekiryl. Use it in your UI, art, or dev projects." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sekiratte.sekiryl.is-a.dev" />
-    <meta property="og:image" content="https://sekiratte.sekiryl.is-a.dev/assets/images/logo.png" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "DefinedTermSet",
-      "name": "Sekiratte",
-      "url": "https://sekiratte.sekiryl.is-a.dev",
-      "creator": {
-        "@type": "Person",
-        "name": "Sekiryl",
-        "url": "https://sekiryl.is-a.dev"
-      },
-      "description": "Sekiratte is a handcrafted color palette inspired by the dark elegance of Sekiro, created by Sekiryl for use in design, games, and UI development."
-    }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sekiratte - Color Palette</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --base: #231e1c;
-            --mantle: #1a1614;
-            --crust: #0f0d0c;
-            
-            /* Text & UI */
-            --text: #e3d8c9;
-            --subtext1: #c5b7a3;
-            --subtext0: #a09585;
-            --overlay2: #7a6e64;
-            --overlay1: #5a5149;
-            --overlay0: #3a3530;
-            
-            /* UPDATED SURFACES */
-            --surface2: #402f28;   /* Previously surface0 */
-            --surface1: #352c26;
-            --surface0: #2a231e;   /* Previously surface2 */
-            
-            /* Accents */
-            --red: #9a2a2a;
-            --maroon: #6d1e1e;
-            --green: #5c7c46;
-            --peach: #d4875d;
-            --blue: #3a5a7a;
-            --lavender: #7a6a9a;
-            --yellow: #d4af37;
-            --rosewater: #e7c8a9;
-            
-            /* Special Tones */
-            --flamingo: #c96d6d;
-            --pink: #b26888;
-            --mauve: #8a6a9a;
-            --teal: #4a8a8a;
-            --sky: #6a9aaa;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: radial-gradient(circle at center, var(--mantle), var(--base));
-            color: var(--text);
-            font-family: 'Cinzel', serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Rubik', sans-serif;
+            background: #231e1c;
+            color: #e3d8c9;
+            line-height: 1.6;
+            padding: 2rem;
         }
-
-        .japanese-pattern {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%233a3530" stroke-width="0.5" opacity="0.3"/><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%233a3530" stroke-width="0.3" opacity="0.2"/></svg>');
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .sakura {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, var(--flamingo) 30%, var(--pink) 100%);
-            border-radius: 50% 50% 50% 0;
-            opacity: 0.7;
-            filter: blur(1px);
-            z-index: -1;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem;
-            position: relative;
-            z-index: 1;
         }
-
+        
         header {
             text-align: center;
-            padding: 1.5rem 0;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--overlay1);
-            position: relative;
+            margin-bottom: 3rem;
         }
-
-        header h1 {
-            font-size: clamp(2rem, 8vw, 3.5rem);
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px rgba(154, 42, 42, 0.5);
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 16px;
+            background: #1a1614;
+            padding: 8px;
+            box-shadow: 0 8px 32px rgba(212, 135, 93, 0.3);
+            border: 1px solid #2a231e;
         }
-
-        header h1::after {
-            content: "影 二度";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
-            font-family: 'Noto Serif JP', serif;
-            letter-spacing: 2px;
-            color: var(--subtext0);
-            white-space: nowrap;
-        }
-
-        .subtitle {
-            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
-            color: var(--subtext0);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .quote {
-            font-style: italic;
-            margin: 1.2rem auto;
-            padding: 0.8rem;
-            border-left: 3px solid var(--red);
-            max-width: 600px;
-            color: var(--subtext1);
-            font-size: clamp(0.85rem, 3vw, 1rem);
-        }
-
-        .category {
-            margin-bottom: 2rem;
-            background: var(--surface2);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .category-header {
-            background: var(--surface1);
-            padding: 1rem;
-            border-bottom: 1px solid var(--overlay1);
-            display: flex;
-            align-items: center;
-        }
-
-        .category-header h2 {
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
-            margin-left: 0.8rem;
-        }
-
-        .category-header i {
-            color: var(--peach);
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-        }
-
-        .color-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1.2rem;
-            padding: 1.2rem;
-        }
-
-        /* FIXED: Consistent color cards */
-        .color-card {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .color-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .color-preview {
-            height: 100px;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .color-preview::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
+        
+        .logo img {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0));
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(212, 135, 93, 0.4));
         }
-
-        .color-info {
-            background: var(--surface0);
-            padding: 0.8rem;
-            font-family: 'Noto Serif JP', serif;
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #e3d8c9, #d4875d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #a09585;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .description {
+            color: #c5b7a3;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .links {
             display: flex;
-            justify-content: space-between;
-            flex-grow: 1;
-            min-height: 110px;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-
-        .color-details {
-            flex-grow: 1;
+        
+        .link-btn {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #1a1614;
+            border: 1px solid #2a231e;
+            border-radius: 8px;
+            color: #e3d8c9;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 500;
         }
-
-        .color-name {
-            font-weight: bold;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-            margin-bottom: 0.3rem;
-            color: var(--text);
+        
+        .link-btn:hover {
+            background: #231e1c;
+            border-color: #d4875d;
+            transform: translateY(-1px);
         }
-
-        .color-hex {
-            color: var(--subtext1);
-            font-size: clamp(0.75rem, 3vw, 0.9rem);
+        
+        .material-symbols-outlined {
+            font-size: 20px;
         }
-
-        .color-theme {
-            font-size: clamp(0.7rem, 3vw, 0.85rem);
-            color: var(--subtext0);
-            margin-top: 0.4rem;
-            font-style: italic;
-            min-height: 2.5em; /* Ensure consistent space for 2 lines */
+        
+        .palette-section {
+            margin-bottom: 3rem;
+            background: #2a231e;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #3a3530;
         }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--overlay1);
-            color: var(--text);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #d4875d;
+        }
+        
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .color-card {
+            background: #1a1614;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid #2a231e;
             cursor: pointer;
+        }
+        
+        .color-card:hover {
+            transform: translateY(-2px);
+            border-color: #3a3530;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .color-preview {
+            height: 80px;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            align-self: center;
-            font-size: clamp(0.7rem, 3vw, 0.85rem);
         }
-
-        .copy-btn:hover {
-            background: var(--surface1);
-            transform: scale(1.1);
-        }
-
-        .copy-btn.copied {
-            background: var(--green);
-            color: var(--base);
-            border-color: var(--green);
-        }
-
-        .copy-btn.copied i {
-            transform: scale(1.2);
-        }
-
-        .usage-section {
-            margin-top: 3rem;
-            background: var(--surface1);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .usage-section h2 {
-            font-size: clamp(1.5rem, 5vw, 2rem);
-            text-align: center;
-            margin-bottom: 1.2rem;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0 1rem;
-            width: 100%;
-        }
-
-        .usage-section h2::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--red), transparent);
-        }
-
-        .usage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .usage-card {
-            background: var(--surface2);
-            border-radius: 8px;
-            padding: 1.2rem;
-            border: 1px solid var(--overlay1);
-        }
-
-        .usage-card h3 {
-            color: var(--yellow);
-            margin-bottom: 0.8rem;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
+        
+        .color-info {
+            padding: 1rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-
-        .usage-card h3 i {
-            margin-right: 0.6rem;
-            color: var(--peach);
-            font-size: clamp(1rem, 4vw, 1.2rem);
+        
+        .color-details {
+            flex: 1;
         }
-
-        .usage-card p {
-            line-height: 1.6;
-            color: var(--subtext1);
-            font-size: clamp(0.85rem, 3.5vw, 1rem);
+        
+        .copy-options {
+            display: flex;
+            gap: 4px;
         }
-
-        .palette-preview {
-            height: 120px;
-            background: linear-gradient(to right, 
-                var(--base), var(--mantle), var(--crust),
-                var(--text), var(--subtext1), var(--subtext0),
-                var(--red), var(--maroon), var(--green), 
-                var(--peach), var(--blue), var(--lavender),
-                var(--yellow), var(--rosewater), var(--flamingo), var(--pink), var(--mauve), var(--teal), var(--sky)
-            );
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
+        
+        .copy-btn {
+            background: #0f0d0c;
+            border: 1px solid #3a3530;
+            border-radius: 4px;
+            color: #c5b7a3;
+            padding: 4px 6px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 32px;
         }
-
-        .palette-preview::after {
-            content: "Sekiratte Palette";
+        
+        .copy-btn:hover {
+            background: #d4875d;
+            color: #0f0d0c;
+            border-color: #d4875d;
+        }
+        
+        .color-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .color-hex {
+            color: #7a6e64;
+            font-size: 0.85rem;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+        
+        .copied {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(1.2rem, 5vw, 2rem);
-            font-weight: bold;
-            color: rgba(227, 216, 201, 0.2);
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-            white-space: nowrap;
+            background: rgba(0,0,0,0.9);
+            color: #d4875d;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
+        
+        .copied.show {
+            opacity: 1;
+        }
+        
+        .usage-section {
+            background: #1a1614;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a231e;
+        }
+        
+        .code-block {
+            background: #0f0d0c;
+            border: 1px solid #2a231e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: #c5b7a3;
+            overflow-x: auto;
+        }
+        
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .element-demo {
+            background: #1a1614;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2a231e;
+        }
+        
+        .element-demo h3 {
+            color: #d4875d;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary, .btn-secondary, .btn-danger {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #d4875d;
+            color: #0f0d0c;
+        }
+        
+        .btn-secondary {
+            background: #3a5a7a;
+            color: #e3d8c9;
+        }
+        
+        .btn-danger {
+            background: #9a2a2a;
+            color: #e3d8c9;
+        }
+        
+        .btn-primary:hover { background: #e7c8a9; }
+        .btn-secondary:hover { background: #6a9aaa; }
+        .btn-danger:hover { background: #c96d6d; }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f0d0c;
+            border: 1px solid #3a3530;
+            border-radius: 6px;
+            color: #e3d8c9;
+            font-family: 'Rubik', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #d4875d;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: #3a3530;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #d4875d;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .demo-card {
+            background: #0f0d0c;
+            border: 1px solid #2a231e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background: #2a231e;
+            padding: 0.75rem;
+            font-weight: 500;
+            color: #d4875d;
+        }
+        
+        .card-body {
+            padding: 1rem;
+            color: #c5b7a3;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #3a3530;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5c7c46, #d4875d);
+            transition: width 0.3s ease;
+        }
+        
+        .status-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge.success {
+            background: #5c7c46;
+            color: #e3d8c9;
+        }
+        
+        .badge.warning {
+            background: #d4875d;
+            color: #0f0d0c;
+        }
+        
+        .badge.error {
+            background: #9a2a2a;
+            color: #e3d8c9;
+        }
+        
         footer {
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            color: var(--subtext0);
-            border-top: 1px solid var(--overlay1);
-            font-family: 'Noto Serif JP', serif;
-            font-size: clamp(0.8rem, 3vw, 0.95rem);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2a231e;
+            color: #7a6e64;
+            font-size: 0.9rem;
         }
-
-        /* Responsive adjustments */
+        
+        .credits {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .credit-link {
+            color: #d4875d;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .credit-link:hover {
+            color: #e3d8c9;
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            .links {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .color-container {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            .credits {
+                flex-direction: column;
                 gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .color-preview {
-                height: 90px;
-            }
-            
-            .color-info {
-                padding: 0.7rem;
-                min-height: 100px;
-            }
-            
-            .usage-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .palette-preview {
-                height: 100px;
-            }
-            
-            .update-notice {
-                margin: 0.8rem 0.5rem 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.8rem;
-            }
-            
-            header {
-                padding: 1rem 0;
-            }
-            
-            .subtitle, .quote {
-                max-width: 95%;
-            }
-            
-            .color-container {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            }
-            
-            .color-preview {
-                height: 80px;
-            }
-            
-            .color-info {
-                min-height: 90px;
-            }
-            
-            .category-header {
-                padding: 0.8rem;
-            }
-            
-            .usage-section {
-                padding: 1rem;
-            }
-            
-            .usage-card {
-                padding: 1rem;
-            }
-            
-            .palette-preview::after {
-                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Decorative elements -->
-    <div class="japanese-pattern"></div>
-    
-    <!-- Sakura blossoms -->
-    <div class="sakura" style="left: 10%; animation-duration: 15s;"></div>
-    <div class="sakura" style="left: 25%; animation-duration: 20s; animation-delay: -5s;"></div>
-    <div class="sakura" style="left: 50%; animation-duration: 18s; animation-delay: -3s;"></div>
-    <div class="sakura" style="left: 75%; animation-duration: 22s; animation-delay: -7s;"></div>
-    <div class="sakura" style="left: 90%; animation-duration: 17s; animation-delay: -2s;"></div>
-    
     <div class="container">
-      <header>
-        <div style="display: flex; align-items: center; gap: 1em; justify-content: center;">
-          <img src="assets/images/logo.png" alt="Logo" style="height: 64px; border-radius: 8px;">
-          <h1 style="margin: 0;">SEKIRATTE</h1>
-        </div>
-        <p class="subtitle" style="margin-top: 0.8em;">
-          A feudal Japan-inspired color palette capturing the essence of Ashina's stone fortresses, autumn valleys, blood-soaked battles, and Shinto shrines.
-        </p>
-        <p class="quote">
-          "Hesitation is defeat. This palette embodies the somber beauty and sudden violence of the Sengoku era."
-        </p>
-      </header>
-    </div>
-        
-        <div class="palette-preview"></div>
-        
-        <!-- Base Colors -->
-        <section class="category">
-            <div class="category-header">
-                <i class="fas fa-mountain"></i>
-                <h2>Base Colors</h2>
+        <header>
+            <div class="logo">
+                <img src="./assets/images/logo.png" alt="Sekiratte Logo">
             </div>
-            <div class="color-container">
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--base);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">base</div>
-                            <div class="color-hex">#231e1c</div>
-                            <div class="color-theme">Background</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--mantle);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">mantle</div>
-                            <div class="color-hex">#1a1614</div>
-                            <div class="color-theme">Secondary background</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--crust);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">crust</div>
-                            <div class="color-hex">#0f0d0c</div>
-                            <div class="color-theme">Active Elements</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Text & UI -->
-        <section class="category">
-            <div class="category-header">
-                <i class="fas fa-scroll"></i>
-                <h2>Text & UI</h2>
-            </div>
-            <div class="color-container">
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--text);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">text</div>
-                            <div class="color-hex">#e3d8c9</div>
-                            <div class="color-theme">Primary text</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--subtext1);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">subtext1</div>
-                            <div class="color-hex">#c5b7a3</div>
-                            <div class="color-theme">Secondary text</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--subtext0);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">subtext0</div>
-                            <div class="color-hex">#a09585</div>
-                            <div class="color-theme">Tertiary text</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--overlay2);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">overlay2</div>
-                            <div class="color-hex">#7a6e64</div>
-                            <div class="color-theme">Hints/disabled</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--overlay1);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">overlay1</div>
-                            <div class="color-hex">#5a5149</div>
-                            <div class="color-theme">Borders</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--overlay0);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">overlay0</div>
-                            <div class="color-hex">#3a3530</div>
-                            <div class="color-theme">Subtle dividers</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Surfaces -->
-        <section class="category">
-            <div class="category-header">
-                <i class="fas fa-torii-gate"></i>
-                <h2>Surfaces</h2>
-            </div>
-            <div class="color-container">
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--surface2);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">surface2</div>
-                            <div class="color-hex">#402f28</div>
-                            <div class="color-theme">Active inputs</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--surface1);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">surface1</div>
-                            <div class="color-hex">#352c26</div>
-                            <div class="color-theme">Hovered states</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--surface0);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">surface0</div>
-                            <div class="color-hex">#2a231e</div>
-                            <div class="color-theme">Cards/panels</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Accents -->
-        <section class="category">
-            <div class="category-header">
-                <i class="fas fa-star"></i>
-                <h2>Accents</h2>
-            </div>
-            <div class="color-container">
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--red);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">red</div>
-                            <div class="color-hex">#9a2a2a</div>
-                            <div class="color-theme">Mortal Blade</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--maroon);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">maroon</div>
-                            <div class="color-hex">#6d1e1e</div>
-                            <div class="color-theme">Dried blood</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--green);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">green</div>
-                            <div class="color-hex">#5c7c46</div>
-                            <div class="color-theme">Divine Grass</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--peach);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">peach</div>
-                            <div class="color-hex">#d4875d</div>
-                            <div class="color-theme">Autumn leaves</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--blue);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">blue</div>
-                            <div class="color-hex">#3a5a7a</div>
-                            <div class="color-theme">Fountainhead waters</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--lavender);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">lavender</div>
-                            <div class="color-hex">#7a6a9a</div>
-                            <div class="color-theme">Illusive mist</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--yellow);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">yellow</div>
-                            <div class="color-hex">#d4af37</div>
-                            <div class="color-theme">Sen</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--rosewater);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">rosewater</div>
-                            <div class="color-hex">#e7c8a9</div>
-                            <div class="color-theme">Lantern light</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Special Tones -->
-        <section class="category">
-            <div class="category-header">
-                <i class="fas fa-dragon"></i>
-                <h2>Special Tones</h2>
-            </div>
-            <div class="color-container">
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--flamingo);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">flamingo</div>
-                            <div class="color-hex">#c96d6d</div>
-                            <div class="color-theme">Sakura petals</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--pink);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">pink</div>
-                            <div class="color-hex">#b26888</div>
-                            <div class="color-theme">Healing Gourd glow</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--mauve);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">mauve</div>
-                            <div class="color-hex">#8a6a9a</div>
-                            <div class="color-theme">Dragonrot corruption</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--teal);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">teal</div>
-                            <div class="color-hex">#4a8a8a</div>
-                            <div class="color-theme">Prosthetic tools (iron/steel)</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: var(--sky);"></div>
-                    <div class="color-info">
-                        <div class="color-details">
-                            <div class="color-name">sky</div>
-                            <div class="color-hex">#6a9aaa</div>
-                            <div class="color-theme">Ashina sky (dawn)</div>
-                        </div>
-                        <button class="copy-btn" title="Copy color">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Usage Recommendations -->
-        <section class="usage-section">
-            <h2>Usage Recommendations</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--subtext1); line-height: 1.7; font-size: clamp(0.9rem, 3.5vw, 1rem);">
-                This palette embodies the somber, atmospheric mood of Ashina with sudden bursts of crimson (combat) and gold (rewards). 
-                Below are recommended pairings for different UI contexts and themes.
-            </p>
+            <h1>Sekiratte</h1>
+            <p class="subtitle">A dark, moody color scheme inspired by Sekiro: Shadows Die Twice</p>
+            <p class="description">Blends the elegance of Catppuccin's palette system with the somber, grounded aesthetic of feudal Japan.</p>
             
-            <div class="usage-grid">
-                <div class="usage-card">
-                    <h3><i class="fas fa-skull"></i> Combat UI Elements</h3>
-                    <p>Use <span style="color: var(--red);">base + text + red</span> for critical combat elements. This combination creates high contrast for important information during battle, with the blood red accent drawing immediate attention.</p>
+            <div class="links">
+                <a href="https://github.com/sekiryl/sekiratte" class="link-btn">
+                    <span class="material-symbols-outlined">code</span>
+                    GitHub
+                </a>
+            </div>
+        </header>
+        
+        <div class="palette-section">
+            <h2 class="section-title">
+                <span class="material-symbols-outlined">palette</span>
+                Color Palette
+            </h2>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+        
+        <div class="usage-section">
+            <h2 class="section-title">
+                <span class="material-symbols-outlined">widgets</span>
+                Example Elements
+            </h2>
+            <div class="elements-grid">
+                <div class="element-demo">
+                    <h3>Buttons</h3>
+                    <button class="btn-primary">Primary</button>
+                    <button class="btn-secondary">Secondary</button>
+                    <button class="btn-danger">Danger</button>
                 </div>
-                <div class="usage-card">
-                    <h3><i class="fas fa-seedling"></i> Interactive Items</h3>
-                    <p>Pair <span style="color: var(--surface0);">surface0</span> with <span style="color: var(--yellow);">yellow</span> and <span style="color: var(--green);">green</span> for interactive items and consumables. The temple wood background complements the sen coins and divine grass colors.</p>
+                <div class="element-demo">
+                    <h3>Form Controls</h3>
+                    <input type="text" placeholder="Enter text..." class="input-field">
+                    <input type="range" class="slider" value="50">
                 </div>
-                <div class="usage-card">
-                    <h3><i class="fas fa-mountain"></i> Mystical Themes</h3>
-                    <p>Combine <span style="color: var(--blue);">blue</span> and <span style="color: var(--lavender);">lavender</span> for mystical/divine themes. These hues evoke the waters of Fountainhead Palace and the otherworldly spirits.</p>
+                <div class="element-demo">
+                    <h3>Cards</h3>
+                    <div class="demo-card">
+                        <div class="card-header">Card Title</div>
+                        <div class="card-body">Sample card content with our theme colors.</div>
+                    </div>
+                </div>
+                <div class="element-demo">
+                    <h3>Progress & Status</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="status-badges">
+                        <span class="badge success">Success</span>
+                        <span class="badge warning">Warning</span>
+                        <span class="badge error">Error</span>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
         
         <footer>
-            <p>Created with the spirit of the Shinobi • Inspired by Sekiro: Shadows Die Twice • 隻狼</p>
-            <p style="margin-top: 0.5rem; font-size: clamp(0.7rem, 3vw, 0.9rem);">Palette structure based on Catppuccin • May you find your resurrection</p>
+            <div class="credits">
+                <a href="https://catppuccin.com/" class="credit-link">
+                    <span class="material-symbols-outlined">favorite</span>
+                    Based on Catppuccin
+                </a>
+                <a href="https://en.wikipedia.org/wiki/Sekiro:_Shadows_Die_Twice" class="credit-link">
+                    <span class="material-symbols-outlined">sports_esports</span>
+                    Inspired by Sekiro
+                </a>
+            </div>
+            <p style="margin-top: 1rem; font-style: italic; color: #5a5149;">"Color is a sword. Choose wisely." – totally not Isshin Ashina</p>
         </footer>
     </div>
 
     <script>
-        // Create additional sakura blossoms
-        document.addEventListener('DOMContentLoaded', function() {
-            for (let i = 0; i < 15; i++) {
-                const sakura = document.createElement('div');
-                sakura.classList.add('sakura');
-                
-                // Random position
-                const left = Math.random() * 100;
-                sakura.style.left = `${left}%`;
-                
-                // Random animation
-                const duration = 15 + Math.random() * 15;
-                const delay = -1 * Math.random() * 10;
-                sakura.style.animationDuration = `${duration}s`;
-                sakura.style.animationDelay = `${delay}s`;
-                
-                // Random size
-                const size = 10 + Math.random() * 15;
-                sakura.style.width = `${size}px`;
-                sakura.style.height = `${size}px`;
-                
-                document.body.appendChild(sakura);
-            }
+        const colors = {
+            "base": "#231e1c", "mantle": "#1a1614", "crust": "#0f0d0c",
+            "text": "#e3d8c9", "subtext1": "#c5b7a3", "subtext0": "#a09585",
+            "overlay2": "#7a6e64", "overlay1": "#5a5149", "overlay0": "#3a3530",
+            "surface2": "#402f28", "surface1": "#352c26", "surface0": "#2a231e",
+            "red": "#9a2a2a", "maroon": "#6d1e1e", "green": "#5c7c46",
+            "peach": "#d4875d", "blue": "#3a5a7a", "lavender": "#7a6a9a",
+            "yellow": "#d4af37", "rosewater": "#e7c8a9", "flamingo": "#c96d6d",
+            "pink": "#b26888", "mauve": "#8a6a9a", "teal": "#4a8a8a", "sky": "#6a9aaa"
+        };
+
+        const rgbColors = [
+            { r: 35, g: 30, b: 28 }, { r: 26, g: 22, b: 20 }, { r: 15, g: 13, b: 12 },
+            { r: 227, g: 216, b: 201 }, { r: 197, g: 183, b: 163 }, { r: 160, g: 149, b: 133 },
+            { r: 122, g: 110, b: 100 }, { r: 90, g: 81, b: 73 }, { r: 58, g: 53, b: 48 },
+            { r: 64, g: 47, b: 40 }, { r: 53, g: 44, b: 38 }, { r: 42, g: 35, b: 30 },
+            { r: 154, g: 42, b: 42 }, { r: 109, g: 30, b: 30 }, { r: 92, g: 124, b: 70 },
+            { r: 212, g: 135, b: 93 }, { r: 58, g: 90, b: 122 }, { r: 122, g: 106, b: 154 },
+            { r: 212, g: 175, b: 55 }, { r: 231, g: 200, b: 169 }, { r: 201, g: 109, b: 109 },
+            { r: 178, g: 104, b: 136 }, { r: 138, g: 106, b: 154 }, { r: 74, g: 138, b: 138 }, { r: 106, g: 154, b: 170 }
+        ];
+
+        const hslColors = {
+            "base": "hsl(21, 11%, 12%)", "mantle": "hsl(20, 13%, 9%)", "crust": "hsl(15, 11%, 5%)",
+            "text": "hsl(35, 25%, 84%)", "subtext1": "hsl(30, 17%, 71%)", "subtext0": "hsl(36, 9%, 57%)",
+            "overlay2": "hsl(27, 10%, 44%)", "overlay1": "hsl(26, 10%, 32%)", "overlay0": "hsl(28, 9%, 21%)",
+            "surface2": "hsl(18, 23%, 20%)", "surface1": "hsl(24, 17%, 18%)", "surface0": "hsl(25, 17%, 14%)",
+            "red": "hsl(0, 57%, 38%)", "maroon": "hsl(0, 57%, 27%)", "green": "hsl(90, 28%, 38%)",
+            "peach": "hsl(21, 56%, 60%)", "blue": "hsl(210, 35%, 35%)", "lavender": "hsl(260, 19%, 51%)",
+            "yellow": "hsl(43, 59%, 52%)", "rosewater": "hsl(30, 56%, 78%)", "flamingo": "hsl(0, 46%, 61%)",
+            "pink": "hsl(316, 27%, 55%)", "mauve": "hsl(260, 19%, 51%)", "teal": "hsl(180, 30%, 42%)", "sky": "hsl(200, 23%, 54%)"
+        };
+
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text);
+            const copied = element.querySelector('.copied');
+            copied.classList.add('show');
+            setTimeout(() => copied.classList.remove('show'), 1500);
+        }
+
+        const palette = document.getElementById('palette');
+        
+        Object.entries(colors).forEach(([name, hex], index) => {
+            const rgb = rgbColors[index];
+            const hsl = hslColors[name];
             
-            // Add subtle interaction to color cards
-            const cards = document.querySelectorAll('.color-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    const preview = this.querySelector('.color-preview');
-                    preview.style.transform = 'scale(1.05)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    const preview = this.querySelector('.color-preview');
-                    preview.style.transform = 'scale(1)';
-                });
-            });
+            const card = document.createElement('div');
+            card.className = 'color-card';
+            card.innerHTML = `
+                <div class="color-preview" style="background-color: ${hex}">
+                    <div class="copied">
+                        <span class="material-symbols-outlined">check</span>
+                        Copied!
+                    </div>
+                </div>
+                <div class="color-info">
+                    <div class="color-details">
+                        <div class="color-name">${name}</div>
+                        <div class="color-hex">${hex}</div>
+                    </div>
+                    <div class="copy-options">
+                        <button class="copy-btn" onclick="copyToClipboard('${hex}', this.closest('.color-card'))">HEX</button>
+                        <button class="copy-btn" onclick="copyToClipboard('rgb(${rgb.r}, ${rgb.g}, ${rgb.b})', this.closest('.color-card'))">RGB</button>
+                        <button class="copy-btn" onclick="copyToClipboard('${hsl}', this.closest('.color-card'))">HSL</button>
+                    </div>
+                </div>
+            `;
             
-            // Copy button functionality
-            const copyButtons = document.querySelectorAll('.copy-btn');
-            copyButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const card = this.closest('.color-card');
-                    const hex = card.querySelector('.color-hex').textContent;
-                    
-                    // Copy to clipboard
-                    navigator.clipboard.writeText(hex).then(() => {
-                        // Visual feedback
-                        const icon = this.querySelector('i');
-                        icon.className = 'fas fa-check';
-                        this.classList.add('copied');
-                        
-                        // Revert after 1.5 seconds
-                        setTimeout(() => {
-                            icon.className = 'fas fa-copy';
-                            this.classList.remove('copied');
-                        }, 1500);
-                    }).catch(err => {
-                        console.error('Failed to copy: ', err);
-                        alert('Failed to copy color to clipboard');
-                    });
-                });
-            });
+            palette.appendChild(card);
         });
     </script>
 </body>
